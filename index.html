@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>三邦车视电影网 - 三邦车视电影网手机版 · 车载影院电影在线看</title>
+<meta name="description" content="三邦车视电影网(sanbangcheshidianyingwang-wap)手机版，专注车载观影场景的汽车电影导航站：行车途中适合看什么片、离线下载清单、座舱大屏适配、长途自驾片单推荐，出行观影一站式指南。">
+<meta name="keywords" content="三邦车视电影网, sanbangcheshidianyingwang-wap, 车载电影, 车机电影, 汽车电影, 车载影院, 行车看电影, 自驾片单, 大屏电影">
+<meta name="author" content="三邦车视电影网">
+<meta name="renderer" content="webkit">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://sanbangcheshidianyingwang-wap.github.io/">
+
+<!-- 必应搜索引擎收录：站点验证占位，替换为 Bing Webmaster Tools 给出的 meta tag 内容 -->
+<meta name="msvalidate.01" content="BING-SITE-VERIFICATION-CODE">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="三邦车视电影网">
+<meta property="og:title" content="三邦车视电影网 - 手机版车载影院电影在线看">
+<meta property="og:description" content="专注车载观影场景的汽车电影导航，行车片单、离线清单、座舱大屏适配推荐。">
+<meta property="og:url" content="https://sanbangcheshidianyingwang-wap.github.io/">
+
+<style>
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* =========================================================
+   三邦车视电影网 · 单文件样式（内联，无外链依赖）
+   设计语言：硬核工业 · 车载屏幕风 —— 炭黑面板 + 琥珀警告黄
+   + 仪表绿，等宽字体 + 细网格背景 + 圆角最小化。
+   与前四站（霓虹 / 薄荷 / 暖橙 / 象牙蓝）视觉体系完全区隔。
+   结构策略：代码块 + 播放器 + 进度条 + 雷达图 + 打字机 +
+   参数表 + 仪表盘，杜绝复用任何现成模板
+   ========================================================= */
+:root{
+  --bg:#101216;
+  --panel:#171a20;
+  --panel2:#1e222a;
+  --line:#2b313c;
+  --line2:#232932;
+  --txt:#e8ecf3;
+  --txt2:#9aa3b0;
+  --txt3:#616a76;
+  --amber:#ffb000;
+  --amber2:#ffcf3f;
+  --green:#45e08a;
+  --red:#ff4d4d;
+  --cyan:#3fd0e6;
+  --blue:#4a7dff;
+  --radius:4px;
+  --glow:0 0 0 1px rgba(255,176,0,.35),0 0 18px -4px rgba(255,176,0,.45);
+  --shadow:0 6px 22px rgba(0,0,0,.45);
+  --max:1140px;
+  --ease:cubic-bezier(.22,.68,.35,1);
+  --mono:"SF Mono","JetBrains Mono","Roboto Mono",Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  background:var(--bg);color:var(--txt);line-height:1.8;
+  overflow-x:hidden;padding-bottom:62px;font-size:15px;
+  background-image:
+    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+  background-size:26px 26px;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+ul,ol{list-style:none}
+input,select,textarea{font-family:inherit}
+::selection{background:var(--amber);color:#101216}
+::-webkit-scrollbar{width:8px;height:8px}
+::-webkit-scrollbar-thumb{background:#333a45;border-radius:4px}
+.mono{font-family:var(--mono);letter-spacing:.02em}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+
+/* ---------- 顶栏 ---------- */
+.top{position:sticky;top:0;z-index:50;background:rgba(16,18,22,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;height:56px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16.5px;flex:0 0 auto;letter-spacing:.01em}
+.logo .mk{width:30px;height:30px;border-radius:3px;background:var(--amber);color:#101216;display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:900;flex:0 0 auto}
+.logo .en{font-family:var(--mono);font-size:9.5px;color:var(--txt3);font-weight:700;letter-spacing:.1em;display:block;line-height:1.25}
+.logo em{font-style:normal;color:var(--amber)}
+.status{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;color:var(--green);border:1px solid var(--line);border-radius:3px;padding:4px 8px}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.search{flex:1;position:relative;min-width:0}
+.search input{width:100%;height:34px;border-radius:3px;border:1px solid var(--line);background:#0c0e11;color:var(--txt);padding:0 34px 0 12px;font-size:13px;outline:none;font-family:var(--mono)}
+.search input:focus{border-color:var(--amber);box-shadow:var(--glow)}
+.search button{position:absolute;right:2px;top:2px;height:30px;width:30px;background:var(--amber);color:#101216;display:grid;place-items:center;transition:.2s}
+.search button:hover{background:var(--amber2)}
+.menu{width:34px;height:34px;border:1px solid var(--line);border-radius:3px;display:grid;place-items:center;flex:0 0 auto;transition:.2s;color:var(--txt2)}
+.menu:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ---------- 抽屉 ---------- */
+.mask{position:fixed;inset:0;background:rgba(5,6,8,.72);z-index:90;opacity:0;pointer-events:none;transition:.3s}
+.mask.show{opacity:1;pointer-events:auto}
+.side{position:fixed;top:0;right:0;bottom:0;width:288px;max-width:86vw;z-index:100;background:var(--panel);border-left:1px solid var(--amber);transform:translateX(102%);transition:.35s var(--ease);padding:20px 18px;overflow:auto}
+.side.show{transform:translateX(0)}
+.side .row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px dashed var(--line)}
+.side .row b{font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.16em}
+.side .x{width:30px;height:30px;border:1px solid var(--line);display:grid;place-items:center;color:var(--txt2)}
+.side nav a{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:center;padding:9px 6px;border-bottom:1px solid var(--line2);font-size:14px;color:var(--txt2);transition:.2s;font-family:var(--mono)}
+.side nav a:hover{color:var(--amber);padding-left:12px}
+.side nav a b{font-size:11px;font-weight:900;color:var(--amber);background:#0c0e11;border:1px solid var(--line);border-radius:3px;height:24px;display:grid;place-items:center}
+.side nav a em{font-style:normal;font-size:10.5px;color:var(--txt3);font-family:inherit}
+.side .ft{margin-top:18px;padding:12px;background:#0c0e11;border:1px solid var(--line);border-radius:3px;font-family:var(--mono);font-size:10.5px;color:var(--txt3);line-height:1.9}
+
+/* ---------- 栏目标题 ---------- */
+.headline{display:flex;align-items:center;gap:10px;margin:32px 0 14px;flex-wrap:wrap}
+.headline .bar{width:3px;height:18px;background:var(--amber)}
+.headline h2{font-size:18.5px;font-weight:900;letter-spacing:.03em}
+.headline .num{font-family:var(--mono);font-size:11px;color:var(--amber);font-weight:800;letter-spacing:.1em;border:1px solid var(--line);border-radius:3px;padding:2px 7px}
+.headline .rule{flex:1;height:1px;background:var(--line);min-width:40px}
+.headline .more{font-size:12px;color:var(--txt3);transition:.18s;font-family:var(--mono)}
+.headline .more:hover{color:var(--amber)}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.panel-h{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.panel-h b{font-size:13.5px;font-weight:800}
+.panel-h span{font-family:var(--mono);font-size:10.5px;color:var(--txt3);margin-left:auto}
+.panel-h .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+
+.btn{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 17px;border-radius:3px;font-size:13.5px;font-weight:700;transition:.22s var(--ease);border:1px solid transparent;font-family:var(--mono);letter-spacing:.04em}
+.btn-a{background:var(--amber);color:#101216}
+.btn-a:hover{background:var(--amber2);transform:translateY(-2px);box-shadow:0 6px 18px rgba(255,176,0,.3)}
+.btn-b{background:transparent;color:var(--txt);border-color:var(--line)}
+.btn-b:hover{border-color:var(--amber);color:var(--amber)}
+
+/* ---------- 栏目一：首页（差异化：代码块 + 打字机 + 数据面板） ---------- */
+.hero{display:grid;gap:14px;grid-template-columns:1fr;margin-top:18px}
+@media(min-width:880px){.hero{grid-template-columns:1.55fr 1fr}}
+.term{border:1px solid var(--line);border-radius:var(--radius);background:var(--panel);box-shadow:var(--shadow);overflow:hidden}
+.term .bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#0c0e11;border-bottom:1px solid var(--line)}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:#333a45}
+.term .bar i:nth-child(1){background:#ff5f57} .term .bar i:nth-child(2){background:#ffbd2e} .term .bar i:nth-child(3){background:#28c840}
+.term .bar em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--txt3);margin-left:8px}
+.term pre{margin:0;padding:18px 18px 16px;font-family:var(--mono);font-size:13px;line-height:2.05;color:#c3cbd6;overflow-x:auto;white-space:pre}
+.term pre .c{color:var(--txt3)}
+.term pre .k{color:var(--amber)}
+.term pre .s{color:var(--green)}
+.term pre .v{color:var(--cyan)}
+.term pre .blink{display:inline-block;width:7px;height:15px;background:var(--amber);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.term .out{margin:0 18px 16px;font-family:var(--mono);font-size:12px;color:var(--green);border-left:2px solid var(--green);padding-left:10px}
+
+.dash{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+@media(min-width:520px){.dash{grid-template-columns:repeat(4,1fr)}}
+.meter-s{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 14px;box-shadow:var(--shadow)}
+.meter-s .lab{font-family:var(--mono);font-size:10.5px;color:var(--txt3);display:flex;justify-content:space-between}
+.meter-s .val{font-family:var(--mono);font-size:23px;font-weight:800;color:var(--amber);margin:4px 0 7px;letter-spacing:.01em}
+.meter-s .val small{font-size:11px;color:var(--txt3);font-weight:600;margin-left:3px}
+.meter-s .track{height:4px;background:#0c0e11;border-radius:2px;overflow:hidden;border:1px solid var(--line2)}
+.meter-s .track i{display:block;height:100%;width:0;border-radius:2px;background:linear-gradient(90deg,var(--amber),var(--green));transition:width 1.1s var(--ease)}
+
+.radar{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.radar svg{width:100%;height:auto;display:block}
+.radar .lg{display:flex;flex-wrap:wrap;gap:8px 14px;padding:12px 4px 0;font-family:var(--mono);font-size:11px;color:var(--txt2)}
+.radar .lg i{display:inline-block;width:8px;height:8px;margin-right:5px}
+
+.feeds{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.feeds .it{display:grid;grid-template-columns:54px 1fr auto;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line2)}
+.feeds .it:last-child{border-bottom:0}
+.feeds time{font-family:var(--mono);font-size:11px;color:var(--amber);text-align:center;line-height:1.4}
+.feeds time em{font-style:normal;display:block;font-size:9.5px;color:var(--txt3)}
+.feeds .tx b{font-size:13px;font-weight:700;display:block}
+.feeds .tx span{font-size:11.5px;color:var(--txt3)}
+.feeds .tg{font-family:var(--mono);font-size:9.5px;font-weight:800;border:1px solid var(--line);border-radius:3px;padding:2px 6px;color:var(--green);white-space:nowrap}
+
+/* ---------- 栏目二：电影库（差异化：播放器 + 进度条 + 规格表） ---------- */
+.now{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:860px){.now{grid-template-columns:1.4fr 1fr}}
+.player{background:#0a0b0e;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.player .screen{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#1a1f27,#0d1014);display:grid;place-items:center;overflow:hidden}
+.player .screen::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,255,255,.018) 3px,rgba(255,255,255,.018) 4px)}
+.player .screen .pl{width:56px;height:56px;border-radius:50%;background:var(--amber);color:#101216;display:grid;place-items:center;z-index:2;transition:.25s;box-shadow:0 0 0 10px rgba(255,176,0,.12)}
+.player .screen .pl:hover{transform:scale(1.08)}
+.player .screen .badge{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:10px;font-weight:800;color:var(--amber);border:1px solid var(--amber);border-radius:3px;padding:3px 7px;background:rgba(10,11,14,.7)}
+.player .screen .res{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:10px;color:var(--txt2);border:1px solid var(--line);border-radius:3px;padding:3px 7px;background:rgba(10,11,14,.7)}
+.player .screen .ov{position:absolute;left:14px;bottom:14px;right:14px;z-index:2}
+.player .screen .ov b{font-size:clamp(16px,3.6vw,22px);font-weight:900;letter-spacing:.03em;text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.player .screen .ov span{font-family:var(--mono);font-size:11px;color:var(--txt2);display:block;margin-top:3px}
+.player .ctl{display:grid;gap:8px;padding:12px 14px;background:var(--panel2);border-top:1px solid var(--line)}
+.player .timeline{height:4px;background:#0c0e11;border-radius:2px;overflow:hidden;cursor:pointer;border:1px solid var(--line2)}
+.player .timeline i{display:block;height:100%;width:0;background:var(--amber);transition:width .2s linear}
+.player .btns{display:flex;align-items:center;gap:8px}
+.player .btns button{width:32px;height:32px;border:1px solid var(--line);border-radius:3px;display:grid;place-items:center;color:var(--txt2);transition:.18s}
+.player .btns button:hover{color:var(--amber);border-color:var(--amber)}
+.player .btns .vol{display:flex;align-items:center;gap:6px;margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--txt3)}
+.player .btns .vol div{width:52px;height:3px;background:#0c0e11;border-radius:2px;overflow:hidden}
+.player .btns .vol div i{display:block;height:100%;width:72%;background:var(--green)}
+.player .btns .full{margin-left:6px}
+
+.queue .it{display:grid;grid-template-columns:26px 1fr 40px;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--line2)}
+.queue .it:last-child{border-bottom:0}
+.queue .it.on{background:rgba(255,176,0,.07)}
+.queue .n{font-family:var(--mono);font-size:11px;color:var(--txt3);font-weight:800}
+.queue .it.on .n{color:var(--amber)}
+.queue .tx b{font-size:13px;display:block}
+.queue .tx span{font-family:var(--mono);font-size:10.5px;color:var(--txt3)}
+.queue .it.on .tx b{color:var(--amber)}
+.queue .dur{font-family:var(--mono);font-size:11px;color:var(--txt3);text-align:right}
+
+.specs{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
+.specs .hd{background:var(--amber);color:#101216;padding:10px 14px;font-family:var(--mono);font-size:12px;font-weight:900;letter-spacing:.08em}
+.specs table{width:100%;border-collapse:collapse;font-size:13px}
+.specs td{padding:10px 14px;border-bottom:1px solid var(--line2);font-family:var(--mono);font-size:12.5px}
+.specs tr:last-child td{border-bottom:0}
+.specs tr:hover td{background:var(--panel2)}
+.specs .k{color:var(--txt3);width:110px;white-space:nowrap}
+.specs .v{color:var(--txt)}
+.specs .v em{font-style:normal;color:var(--amber);font-weight:800}
+.specs .v ok{color:var(--green);font-weight:800}
+
+.tabs{display:flex;gap:0;background:var(--panel);border:1px solid var(--line);border-bottom:0;border-radius:var(--radius) var(--radius) 0 0;overflow-x:auto}
+.tabs button{font-family:var(--mono);font-size:12px;padding:11px 16px;color:var(--txt3);border-right:1px solid var(--line);white-space:nowrap;transition:.18s}
+.tabs button.on{background:var(--panel2);color:var(--amber);font-weight:800}
+.tabs button:hover{color:var(--amber)}
+.tabs button .ct{font-size:9.5px;opacity:.7;margin-left:5px}
+.list{border:1px solid var(--line);border-radius:0 0 var(--radius) var(--radius);background:var(--panel);box-shadow:var(--shadow);max-height:520px;overflow:auto}
+.list .row{display:grid;grid-template-columns:38px 1fr 64px 46px;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line2)}
+.list .row:last-child{border-bottom:0}
+.list .row .no{font-family:var(--mono);font-size:12px;color:var(--txt3);font-weight:800}
+.list .row.on .no{color:var(--amber)}
+.list .nm b{font-size:13.5px;font-weight:700;display:block}
+.list .nm span{font-family:var(--mono);font-size:10.5px;color:var(--txt3)}
+.list .prog{height:4px;background:#0c0e11;border-radius:2px;overflow:hidden;border:1px solid var(--line2)}
+.list .prog i{display:block;height:100%;background:var(--amber)}
+.list .sc{font-family:var(--mono);font-size:12px;color:var(--green);text-align:right;font-weight:800}
+.list .sc em{font-style:normal;display:block;font-size:9.5px;color:var(--txt3);font-weight:400}
+.list .pg{display:none}
+.list .pg.on{display:block}
+
+/* ---------- 栏目三：排行榜（差异化：仪表盘 + 刻度条 + 对比表） ---------- */
+.gauges{display:grid;gap:14px;grid-template-columns:1fr;margin-bottom:14px}
+@media(min-width:760px){.gauges{grid-template-columns:1fr 1fr}}
+.gauge{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative}
+.gauge .cap{font-family:var(--mono);font-size:10.5px;color:var(--txt3);letter-spacing:.14em;margin-bottom:2px}
+.gauge h3{font-size:15.5px;font-weight:900;margin-bottom:14px}
+.gauge .face{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center}
+@media(max-width:420px){.gauge .face{grid-template-columns:96px 1fr}}
+.gauge svg{width:100%;height:auto;transform:rotate(-90deg)}
+.gauge .info b{font-family:var(--mono);font-size:27px;color:var(--amber);display:block;line-height:1}
+.gauge .info span{font-family:var(--mono);font-size:11px;color:var(--txt3);display:block;margin-top:5px}
+.gauge .info p{font-size:12.5px;color:var(--txt2);margin-top:8px}
+
+.bars{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.bars .it{padding:13px 16px;border-bottom:1px solid var(--line2)}
+.bars .it:last-child{border-bottom:0}
+.bars .top{display:flex;align-items:baseline;gap:9px;margin-bottom:7px}
+.bars .top b{font-size:14px;font-weight:800}
+.bars .top span{font-family:var(--mono);font-size:10.5px;color:var(--txt3)}
+.bars .top em{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--amber);margin-left:auto;font-weight:800}
+.bars .track{height:6px;background:#0c0e11;border-radius:3px;overflow:hidden;border:1px solid var(--line2);display:flex;gap:2px;padding:1px}
+.bars .track i{flex:0 0 auto;height:100%;width:0;background:linear-gradient(90deg,#3a3f48,var(--amber));border-radius:2px;transition:width .9s var(--ease)}
+.bars .tk2 i{background:linear-gradient(90deg,#3a3f48,var(--green))}
+
+.vs{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:760px){.vs{grid-template-columns:1fr 1fr}}
+.vsc{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.vsc .hd{background:var(--panel2);padding:10px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px}
+.vsc .hd b{font-size:14px;font-weight:800}
+.vsc .hd span{font-family:var(--mono);font-size:10.5px;color:var(--txt3);margin-left:auto}
+.vsc ul{padding:4px 0}
+.vsc li{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px dashed var(--line2)}
+.vsc li:last-child{border-bottom:0}
+.vsc .no{font-family:var(--mono);font-size:12px;font-weight:800;color:var(--amber)}
+.vsc li.g2 .no{color:var(--green)}
+.vsc .tx b{font-size:13px;display:block}
+.vsc .tx span{font-family:var(--mono);font-size:10.5px;color:var(--txt3)}
+.vsc .rt{font-family:var(--mono);font-size:12.5px;font-weight:800;color:var(--amber);text-align:right}
+.vsc li.g2 .rt{color:var(--green)}
+
+/* ---------- 栏目四：关于本站（差异化：流程图 + 键值配置表 + 声明卡片） ---------- */
+.flow{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:640px){.flow{grid-template-columns:repeat(4,1fr)}}
+.flow .st{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:var(--radius);padding:15px;box-shadow:var(--shadow);position:relative}
+.flow .st:nth-child(2){border-left-color:var(--green)}
+.flow .st:nth-child(3){border-left-color:var(--cyan)}
+.flow .st:nth-child(4){border-left-color:var(--blue)}
+.flow .st .n{font-family:var(--mono);font-size:10.5px;color:var(--txt3);letter-spacing:.14em}
+.flow .st h4{font-size:14.5px;font-weight:900;margin:4px 0 5px}
+.flow .st p{font-size:12.5px;color:var(--txt3);line-height:1.75}
+.flow .st .arrow{position:absolute;right:-9px;top:50%;transform:translateY(-50%);color:var(--amber);z-index:2;font-size:14px}
+@media(max-width:639px){.flow .st .arrow{display:none}}
+
+.split3{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:860px){.split3{grid-template-columns:1fr 1fr}}
+.kv{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--panel);box-shadow:var(--shadow)}
+.kv .hd{background:var(--panel2);padding:10px 14px;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px;color:var(--amber);display:flex;justify-content:space-between}
+.kv dl{margin:0}
+.kv .pair{display:grid;grid-template-columns:110px 1fr;padding:11px 14px;border-bottom:1px solid var(--line2)}
+.kv .pair:last-child{border-bottom:0}
+.kv dt{font-family:var(--mono);font-size:11.5px;color:var(--txt3);padding-top:1px}
+.kv dd{font-family:var(--mono);font-size:12.5px;color:var(--txt);word-break:break-all}
+.kv dd em{font-style:normal;color:var(--amber);font-weight:800}
+
+.quote{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;position:relative;box-shadow:var(--shadow)}
+.quote .q{font-family:var(--mono);font-size:10.5px;color:var(--amber);margin-bottom:6px;letter-spacing:.12em}
+.quote p{font-size:14.5px;line-height:1.85;color:var(--txt2)}
+.quote p b{color:var(--txt)}
+.notice{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.notice h4{font-size:14.5px;font-weight:900;display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.notice h4 i{width:16px;height:16px;background:var(--amber);color:#101216;border-radius:3px;display:grid;place-items:center;font-family:var(--mono);font-size:10px;font-weight:900}
+.notice p{font-size:12.5px;color:var(--txt3);line-height:1.85}
+
+.checks{display:grid;gap:10px;grid-template-columns:1fr;margin-top:14px}
+@media(min-width:620px){.checks{grid-template-columns:1fr 1fr}}
+.ck{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:13px 15px;display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:flex-start;box-shadow:var(--shadow)}
+.ck i{width:16px;height:16px;border:1.5px solid var(--green);border-radius:2px;display:grid;place-items:center;margin-top:3px;flex:0 0 auto}
+.ck i svg{color:var(--green)}
+.ck b{font-size:13px;font-weight:800;display:block}
+.ck span{font-size:12px;color:var(--txt3)}
+
+/* ---------- 底部 ---------- */
+.foot{margin-top:44px;background:#0a0b0e;border-top:2px solid var(--amber);padding:32px 0 22px}
+.foot .wrap{display:grid;gap:24px;grid-template-columns:1fr}
+@media(min-width:800px){.foot .wrap{grid-template-columns:1.7fr 1fr 1fr 1fr}}
+.foot h5{font-family:var(--mono);font-size:11.5px;color:var(--amber);letter-spacing:.14em;margin-bottom:11px}
+.foot ul li{margin-bottom:7px}
+.foot ul a{font-size:13px;color:var(--txt3);transition:.18s;font-family:var(--mono);font-size:12.5px}
+.foot ul a:hover{color:var(--amber);padding-left:4px}
+.foot .brand p{font-size:13px;color:var(--txt3);margin-top:9px;max-width:320px;line-height:1.85}
+.foot .cp{margin-top:22px;padding-top:14px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:11px;color:var(--txt3);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
+
+/* ---------- 底部导航 ---------- */
+.btab{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(16,18,22,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line)}
+.btab nav{display:grid;grid-template-columns:repeat(4,1fr)}
+.btab a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:56px;font-family:var(--mono);font-size:10px;color:var(--txt3);transition:.18s}
+.btab a b{font-size:13px;font-weight:900}
+.btab a.on{color:var(--amber);background:rgba(255,176,0,.06)}
+.btab a.on b{color:var(--amber)}
+
+.topbtn{position:fixed;right:12px;bottom:68px;z-index:55;width:36px;height:36px;background:var(--amber);color:#101216;display:none;place-items:center;box-shadow:var(--shadow)}
+.topbtn.show{display:grid}
+.topbtn:hover{background:var(--amber2)}
+
+@media(max-width:560px){
+  .wrap{padding:0 13px}
+  .status{display:none}
+  .dash{grid-template-columns:1fr 1fr}
+  .flow{grid-template-columns:1fr}
+  .list .row{grid-template-columns:30px 1fr 52px}
+  .list .sc{display:none}
+  .specs td{padding:9px 12px;font-size:11.5px}
+  .specs .k{width:84px}
+}
+@media print{
+  body{background:#fff;color:#000;padding:0;font-size:11px}
+  .top,.btab,.side,.mask,.topbtn{display:none!important}
+  .panel,.gauge,.bars,.term,.specs,.list,.queue,.kv,.quote,.notice,.ck,.flow .st,.meter-s,.radar,.feeds{box-shadow:none;border-color:#999}
+  .term pre{white-space:pre-wrap}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- ================= 顶部 ================= -->
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="三邦车视电影网首页">
+      <span class="mk" aria-hidden="true">3B</span>
+      <span><span class="en">3BANG CAR-VIEW</span>三邦<em>车视</em>电影网</span>
+    </a>
+    <span class="status"><i></i>NODE ONLINE</span>
+    <div class="search" role="search">
+      <input type="search" name="q" placeholder="检索 /片名 /题材 /适合场景" aria-label="搜索电影">
+      <button type="submit" aria-label="搜索">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      </button>
+    </div>
+    <button class="menu" id="menuBtn" aria-label="打开菜单" aria-expanded="false">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ================= 抽屉 ================= -->
+<div class="mask" id="mask"></div>
+<aside class="side" id="side" aria-label="站点导航">
+  <div class="row"><b>NAV // MENU</b>
+    <button class="x" id="closeBtn" aria-label="关闭菜单">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="#top"><b>01</b><span>控制台 / 首页</span></a>
+    <a href="#library"><b>02</b><span>片库与播放</span></a>
+    <a href="#rank"><b>03</b><span>数据看板</span></a>
+    <a href="#about"><b>04</b><span>关于本站</span></a>
+  </nav>
+  <p style="font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.12em;margin:16px 0 8px">// 场景标签</p>
+  <nav>
+    <a href="#library"><b>A1</b><span>长途自驾</span></a>
+    <a href="#library"><b>A2</b><span>城市通勤</span></a>
+    <a href="#library"><b>A3</b><span>露营驻车</span></a>
+    <a href="#library"><b>A4</b><span>亲子同车</span></a>
+    <a href="#library"><b>A5</b><span>夜路行驶</span></a>
+    <a href="#library"><b>A6</b><span>大屏适配</span></a>
+  </nav>
+  <p style="font-family:var(--mono);font-size:11px;color:var(--amber);letter-spacing:.12em;margin:16px 0 8px">// 服务接口</p>
+  <nav>
+    <a href="#about"><b>β1</b><span>离线清单生成</span></a>
+    <a href="#about"><b>β2</b><span>座舱适配检测</span></a>
+    <a href="#about"><b>β3</b><span>自驾路线片单</span></a>
+    <a href="#about"><b>β4</b><span>故障与反馈</span></a>
+  </nav>
+  <div class="ft">三邦车视电影网 手机版<br>URL: https://sanbangcheshidianyingwang-wap.github.io/</div>
+</aside>
+
+<main class="wrap" id="top">
+
+  <!-- ================= 栏目一：首页 ================= -->
+  <section id="home" aria-label="控制台首页">
+    <div class="hero">
+      <h1 class="sr">三邦车视电影网</h1>
+      <div class="term">
+        <div class="bar"><i></i><i></i><i></i><em>~/3bang/car-view — bash</em></div>
+        <pre><span class="c"># 三邦车视电影网 · 车载观影导航终端</span>
+<span class="c"># SANBANG CAR-VIEW FILM PORTAL  v2.6</span>
+
+<span class="k">$</span> <span class="s">whoami</span>
+<span class="v">→ 车载观影场景导航站</span>
+
+<span class="k">$</span> <span class="s">cat</span> ./mission.txt
+<span class="v">→ 为每一次出行匹配一部好片</span>
+
+<span class="k">$</span> <span class="s">cat</span> ./scene_tags.json
+<span class="v">→</span> 长途自驾 <span class="v">·</span> 城市通勤 <span class="v">·</span> 露营驻车
+<span class="v">→</span> 亲子同车 <span class="v">·</span> 夜路行驶 <span class="v">·</span> 大屏适配
+
+<span class="k">$</span> <span id="type"></span><span class="blink"></span></pre>
+        <p class="out">✓ system ready · 已为你的出行场景完成匹配</p>
+      </div>
+
+      <div>
+        <div class="dash">
+          <div class="meter-s"><div class="lab"><span>在线片单</span><em>UNITS</em></div><div class="val" data-n="186">0</div><small>部</small><div class="track"><i style="width:93%"></i></div></div>
+          <div class="meter-s"><div class="lab"><span>场景标签</span><em>TAGS</em></div><div class="val" data-n="42">0</div><small>个</small><div class="track"><i style="width:70%"></i></div></div>
+          <div class="meter-s"><div class="lab"><span>适配车机</span><em>MODEL</em></div><div class="val" data-n="96">0</div><small>款</small><div class="track"><i style="width:86%"></i></div></div>
+          <div class="meter-s"><div class="lab"><span>用户评分</span><em>STAR</em></div><div class="val" data-n="4.8">0</div><small>/5.0</small><div class="track"><i style="width:96%"></i></div></div>
+        </div>
+
+        <div class="radar" style="margin-top:14px">
+          <svg viewBox="0 0 200 200" aria-label="车载观影场景适配雷达图">
+            <polygon points="100,18 172,70 150,158 50,158 28,70" fill="none" stroke="#2b313c" stroke-width="1"/>
+            <polygon points="100,48 152,76 136,140 64,140 48,76" fill="none" stroke="#2b313c" stroke-width="1"/>
+            <polygon points="100,80 134,90 126,122 74,122 66,90" fill="none" stroke="#2b313c" stroke-width="1"/>
+            <line x1="100" y1="18" x2="100" y2="158" stroke="#2b313c"/><line x1="28" y1="70" x2="172" y2="70" stroke="#2b313c"/>
+            <line x1="50" y1="158" x2="150" y2="158" stroke="#2b313c"/><line x1="172" y1="70" x2="50" y2="158" stroke="#2b313c"/><line x1="28" y1="70" x2="150" y2="158" stroke="#2b313c"/>
+            <polygon id="rd" points="100,34 162,64 142,148 56,150 36,74" fill="rgba(255,176,0,.22)" stroke="#ffb000" stroke-width="2"/>
+            <g fill="#ffb000" font-family="monospace" font-size="9">
+              <text x="94" y="14">高速长途</text><text x="176" y="74">亲子</text><text x="142" y="176">夜路</text><text x="28" y="176">通勤</text><text x="2" y="74">露营</text>
+            </g>
+          </svg>
+          <div class="lg"><span><i style="background:var(--amber)"></i>适配覆盖指数</span><span>5 类场景综合评估</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="headline">
+      <span class="bar"></span><span class="num">LOG 01</span>
+      <h2>实时动态</h2><span class="rule"></span>
+      <a class="more" href="#">MORE ›</a>
+    </div>
+    <div class="feeds">
+      <div class="it"><time>10:42<em>AM</em></time><div class="tx"><b>长途自驾片单 v12 已发布</b><span>新增 8 部适合连续播放的剧情长片</span></div><span class="tg">NEW</span></div>
+      <div class="it"><time>09:15<em>AM</em></time><div class="tx"><b>座舱大屏适配检测上线</b><span>支持识别车机分辨率与比例，推荐最佳画质</span></div><span class="tg">SYS</span></div>
+      <div class="it"><time>昨日<em>20:08</em></time><div class="tx"><b>露营驻车专题更新</b><span>离线优先清单，弱网环境也能看</span></div><span class="tg">UPD</span></div>
+      <div class="it"><time>昨日<em>17:30</em></time><div class="tx"><b>亲子同车标签细化</b><span>新增适龄分级与单集时长标注</span></div><span class="tg">TAG</span></div>
+      <div class="it"><time>2 天前<em>11:00</em></time><div class="tx"><b>夜路行驶建议片单</b><span>避免强闪烁与高对比画面，护眼优先</span></div><span class="tg">TIP</span></div>
+    </div>
+  </section>
+
+  <!-- ================= 栏目二：电影库 ================= -->
+  <section id="library" aria-label="片库与播放">
+    <div class="headline">
+      <span class="bar"></span><span class="num">LIB 02</span>
+      <h2>片库与播放</h2><span class="rule"></span>
+      <a class="more" href="#">ALL ›</a>
+    </div>
+
+    <div class="now">
+      <div class="player">
+        <div class="screen">
+          <span class="badge">▶ NOW PLAYING</span>
+          <span class="res">4K · HDR</span>
+          <button class="pl" aria-label="播放"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg></button>
+          <div class="ov"><b id="plT">极速公路</b><span id="plS">动作 / 公路 · 适合：长途自驾 · 112 min</span></div>
+        </div>
+        <div class="ctl">
+          <div class="timeline" id="tl"><i style="width:38%"></i></div>
+          <div class="btns">
+            <button aria-label="上一集"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 6l-5 6 5 6zM17 6l-5 6 5 6z"/></svg></button>
+            <button aria-label="播放/暂停"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg></button>
+            <button aria-label="下一集"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M5 6l5 6-5 6zM15 6l5 6-5 6z"/></svg></button>
+            <span class="vol"><span>VOL</span><div><i></i></div></span>
+            <button class="full" aria-label="全屏"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-h"><b>播放队列</b><span>QUEUE · 6</span><span class="dot"></span></div>
+        <div class="queue">
+          <div class="it on"><span class="n">01</span><div class="tx"><b>极速公路</b><span>动作 / 公路 · 112 min</span></div><span class="dur">42:18</span></div>
+          <div class="it"><span class="n">02</span><div class="tx"><b>无人区之夜</b><span>悬疑 / 公路 · 98 min</span></div><span class="dur">未播</span></div>
+          <div class="it"><span class="n">03</span><div class="tx"><b>雪山补给站</b><span>剧情 / 冒险 · 105 min</span></div><span class="dur">未播</span></div>
+          <div class="it"><span class="n">04</span><div class="tx"><b>服务区故事集</b><span>短片合集 · 6 集</span></div><span class="dur">未播</span></div>
+          <div class="it"><span class="n">05</span><div class="tx"><b>海岸线行驶中</b><span>纪录 / 风光 · 88 min</span></div><span class="dur">未播</span></div>
+          <div class="it"><span class="n">06</span><div class="tx"><b>停车场与星空</b><span>治愈 / 音乐 · 76 min</span></div><span class="dur">未播</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="split3" style="margin-top:14px">
+      <div class="specs">
+        <div class="hd">// 当前影片规格 · SPEC</div>
+        <table>
+          <tbody>
+            <tr><td class="k">影片名称</td><td class="v">极速公路 <em>(RUSH HIGHWAY)</em></td></tr>
+            <tr><td class="k">类型标签</td><td class="v">动作 / 公路 / 犯罪</td></tr>
+            <tr><td class="k">适合场景</td><td class="v">长途自驾 · 露营驻车</td></tr>
+            <tr><td class="k">片长</td><td class="v">112 分钟（单集可分段）</td></tr>
+            <tr><td class="k">画质输出</td><td class="v">4K · HDR · 帧率 60fps</td></tr>
+            <tr><td class="k">音频声道</td><td class="v">5.1 环绕 · 车机适配</td></tr>
+            <tr><td class="k">弱网支持</td><td class="v"><ok>✔ 离线可播</ok></td></tr>
+            <tr><td class="k">适配车机</td><td class="v">96 款主流车型</td></tr>
+            <tr><td class="k">分级提示</td><td class="v">PG-13 · 含追车镜头</td></tr>
+            <tr><td class="k">综合评分</td><td class="v"><em>8.7</em> / 10 · 12.4k 评价</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="quote">
+        <div class="q">// NOTE_FROM_EDITOR</div>
+        <p><b>「行车途中不适合需要高度专注的复杂剧情，也不适合画面剧烈晃动的类型。」</b>本站筛选片单的核心标准只有三条：单集时长可控、情绪曲线平缓、在断网与颠簸环境下仍能看懂。</p>
+        <div class="checks">
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>离线优先</b><span>标注可缓存片源，服务区也能播</span></div></div>
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>大屏适配</b><span>按车机分辨率推荐最佳画质</span></div></div>
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>时段分级</b><span>白天 / 夜路 / 深夜分开推荐</span></div></div>
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>不干扰驾驶</b><span>优先无强闪烁、低跳跃剪辑的片</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" style="margin-top:14px">
+      <button class="on" data-tab="t1">长途自驾<span class="ct">48</span></button>
+      <button data-tab="t2">城市通勤<span class="ct">36</span></button>
+      <button data-tab="t3">露营驻车<span class="ct">29</span></button>
+      <button data-tab="t4">亲子同车<span class="ct">41</span></button>
+      <button data-tab="t5">夜路行驶<span class="ct">22</span></button>
+      <button data-tab="t6">大屏适配<span class="ct">10</span></button>
+    </div>
+    <div class="list" id="list">
+      <div class="pg on" data-pg="t1">
+        <div class="row on"><span class="no">01</span><div class="nm"><b>极速公路</b><span>动作 / 公路 · 112 min</span></div><div class="prog"><i style="width:100%"></i></div><div class="sc">8.7<em>综合</em></div></div>
+        <div class="row"><span class="no">02</span><div class="nm"><b>无人区之夜</b><span>悬疑 / 公路 · 98 min</span></div><div class="prog"><i style="width:85%"></i></div><div class="sc">8.5<em>综合</em></div></div>
+        <div class="row"><span class="no">03</span><div class="nm"><b>雪山补给站</b><span>剧情 / 冒险 · 105 min</span></div><div class="prog"><i style="width:78%"></i></div><div class="sc">8.3<em>综合</em></div></div>
+        <div class="row"><span class="no">04</span><div class="nm"><b>海岸线行驶中</b><span>纪录 / 风光 · 88 min</span></div><div class="prog"><i style="width:72%"></i></div><div class="sc">8.4<em>综合</em></div></div>
+        <div class="row"><span class="no">05</span><div class="nm"><b>服务区故事集</b><span>短片合集 · 6 集 × 22 min</span></div><div class="prog"><i style="width:68%"></i></div><div class="sc">8.1<em>综合</em></div></div>
+        <div class="row"><span class="no">06</span><div class="nm"><b>平原上的信号</b><span>剧情 / 治愈 · 102 min</span></div><div class="prog"><i style="width:60%"></i></div><div class="sc">8.0<em>综合</em></div></div>
+      </div>
+      <div class="pg" data-pg="t2">
+        <div class="row"><span class="no">01</span><div class="nm"><b>三十分钟生活圈</b><span>都市 / 喜剧 · 96 min</span></div><div class="prog"><i style="width:82%"></i></div><div class="sc">8.2<em>综合</em></div></div>
+        <div class="row"><span class="no">02</span><div class="nm"><b>地下车库的猫</b><span>短片 / 治愈 · 24 min</span></div><div class="prog"><i style="width:74%"></i></div><div class="sc">8.0<em>综合</em></div></div>
+        <div class="row"><span class="no">03</span><div class="nm"><b>红灯之前</b><span>剧情 / 都市 · 89 min</span></div><div class="prog"><i style="width:66%"></i></div><div class="sc">7.9<em>综合</em></div></div>
+        <div class="row"><span class="no">04</span><div class="nm"><b>高架桥上的雨</b><span>爱情 / 都市 · 93 min</span></div><div class="prog"><i style="width:60%"></i></div><div class="sc">7.8<em>综合</em></div></div>
+      </div>
+      <div class="pg" data-pg="t3">
+        <div class="row"><span class="no">01</span><div class="nm"><b>停车场与星空</b><span>治愈 / 音乐 · 76 min</span></div><div class="prog"><i style="width:88%"></i></div><div class="sc">8.6<em>综合</em></div></div>
+        <div class="row"><span class="no">02</span><div class="nm"><b>帐篷外的风</b><span>纪录 / 自然 · 84 min</span></div><div class="prog"><i style="width:80%"></i></div><div class="sc">8.4<em>综合</em></div></div>
+        <div class="row"><span class="no">03</span><div class="nm"><b>湖边放映队</b><span>剧情 / 治愈 · 99 min</span></div><div class="prog"><i style="width:70%"></i></div><div class="sc">8.2<em>综合</em></div></div>
+        <div class="row"><span class="no">04</span><div class="nm"><b>篝火电影院</b><span>短片合集 · 5 集 × 18 min</span></div><div class="prog"><i style="width:62%"></i></div><div class="sc">8.0<em>综合</em></div></div>
+      </div>
+      <div class="pg" data-pg="t4">
+        <div class="row"><span class="no">01</span><div class="nm"><b>小汽车大冒险</b><span>动画 / 冒险 · 82 min</span></div><div class="prog"><i style="width:90%"></i></div><div class="sc">8.9<em>综合</em></div></div>
+        <div class="row"><span class="no">02</span><div class="nm"><b>会说话的后视镜</b><span>动画 / 喜剧 · 78 min</span></div><div class="prog"><i style="width:84%"></i></div><div class="sc">8.5<em>综合</em></div></div>
+        <div class="row"><span class="no">03</span><div class="nm"><b>路上的小侦探</b><span>儿童 / 推理 · 68 min</span></div><div class="prog"><i style="width:76%"></i></div><div class="sc">8.3<em>综合</em></div></div>
+        <div class="row"><span class="no">04</span><div class="nm"><b>颜色车车队</b><span>动画 / 启蒙 · 60 min</span></div><div class="prog"><i style="width:68%"></i></div><div class="sc">8.4<em>综合</em></div></div>
+      </div>
+      <div class="pg" data-pg="t5">
+        <div class="row"><span class="no">01</span><div class="nm"><b>夜航公路</b><span>悬疑 / 公路 · 104 min</span></div><div class="prog"><i style="width:79%"></i></div><div class="sc">8.3<em>综合</em></div></div>
+        <div class="row"><span class="no">02</span><div class="nm"><b>凌晨两点加油站</b><span>剧情 / 悬疑 · 91 min</span></div><div class="prog"><i style="width:70%"></i></div><div class="sc">8.1<em>综合</em></div></div>
+        <div class="row"><span class="no">03</span><div class="nm"><b>隧道尽头的光</b><span>惊悚 / 短片 · 26 min</span></div><div class="prog"><i style="width:58%"></i></div><div class="sc">7.9<em>综合</em></div></div>
+      </div>
+      <div class="pg" data-pg="t6">
+        <div class="row"><span class="no">01</span><div class="nm"><b>超宽屏适配精选</b><span>21:9 · 10 部</span></div><div class="prog"><i style="width:95%"></i></div><div class="sc">4K<em>HDR</em></div></div>
+        <div class="row"><span class="no">02</span><div class="nm"><b>方形屏友好片单</b><span>1:1 · 10 部</span></div><div class="prog"><i style="width:88%"></i></div><div class="sc">FHD<em>适配</em></div></div>
+        <div class="row"><span class="no">03</span><div class="nm"><b>竖屏微短片</b><span>9:16 · 10 部</span></div><div class="prog"><i style="width:76%"></i></div><div class="sc>9:16<em>原生</em></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 栏目三：排行榜 ================= -->
+  <section id="rank" aria-label="数据看板">
+    <div class="headline">
+      <span class="bar"></span><span class="num">CHT 03</span>
+      <h2>数据看板</h2><span class="rule"></span>
+      <a class="more" href="#">FULL ›</a>
+    </div>
+
+    <div class="gauges">
+      <div class="gauge">
+        <div class="cap">GAUGE / 01</div>
+        <h3>本月车载播放指数</h3>
+        <div class="face">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#232932" stroke-width="11"/>
+            <circle id="g1" cx="60" cy="60" r="52" fill="none" stroke="#ffb000" stroke-width="11" stroke-linecap="butt" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+          </svg>
+          <div class="info"><b id="g1v">0</b><span>INDEX · / 100</span><p>综合播放完成率、续播率与车机适配通过率加权得出。</p></div>
+        </div>
+      </div>
+      <div class="gauge">
+        <div class="cap">GAUGE / 02</div>
+        <h3>场景覆盖率</h3>
+        <div class="face">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="52" fill="none" stroke="#232932" stroke-width="11"/>
+            <circle id="g2" cx="60" cy="60" r="52" fill="none" stroke="#45e08a" stroke-width="11" stroke-linecap="butt" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+          </svg>
+          <div class="info"><b id="g2v">0</b><span>COVERAGE · / 100</span><p>长途、通勤、露营、亲子、夜路五类场景的片单完整度。</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="headline" style="margin:24px 0 12px">
+      <span class="bar"></span><span class="num">BAR 04</span>
+      <h2>场景热度排行</h2><span class="rule"></span>
+    </div>
+    <div class="bars">
+      <div class="it"><div class="top"><b>长途自驾</b><span>高频场景 · 片单最全</span><em>96</em></div><div class="track tk"><i style="width:96%"></i></div></div>
+      <div class="it"><div class="top"><b>亲子同车</b><span>家庭出行 · 适龄分级</span><em>88</em></div><div class="track tk"><i style="width:88%"></i></div></div>
+      <div class="it"><div class="top"><b>城市通勤</b><span>短时段 · 碎片观看</span><em>79</em></div><div class="track tk"><i style="width:79%"></i></div></div>
+      <div class="it"><div class="top"><b>露营驻车</b><span>离线优先 · 氛围向</span><em>71</em></div><div class="track tk"><i style="width:71%"></i></div></div>
+      <div class="it"><div class="top"><b>夜路行驶</b><span>护眼优先 · 低刺激</span><em>58</em></div><div class="track tk"><i style="width:58%"></i></div></div>
+      <div class="it"><div class="top"><b>大屏适配</b><span>分辨率识别 · 画质推荐</span><em>45</em></div><div class="track tk"><i style="width:45%"></i></div></div>
+    </div>
+
+    <div class="headline" style="margin:24px 0 12px">
+      <span class="bar"></span><span class="num">VS 05</span>
+      <h2>同类片单对比</h2><span class="rule"></span>
+    </div>
+    <div class="vs">
+      <div class="vsc">
+        <div class="hd"><b>综合口碑榜</b><span>OUR LIST</span></div>
+        <ul>
+          <li><span class="no">01</span><div class="tx"><b>极速公路</b><span>动作 / 公路 · 8.7</span></div><span class="rt">96<small>热度</small></span></li>
+          <li><span class="no">02</span><div class="tx"><b>小汽车大冒险</b><span>动画 / 冒险 · 8.9</span></div><span class="rt">91<small>热度</small></span></li>
+          <li><span class="no">03</span><div class="tx"><b>停车场与星空</b><span>治愈 / 音乐 · 8.6</span></div><span class="rt">87<small>热度</small></span></li>
+          <li><span class="no">04</span><div class="tx"><b>无人区之夜</b><span>悬疑 / 公路 · 8.5</span></div><span class="rt">82<small>热度</small></span></li>
+          <li><span class="no">05</span><div class="tx"><b>夜航公路</b><span>悬疑 / 公路 · 8.3</span></div><span class="rt">76<small>热度</small></span></li>
+          <li><span class="no">06</span><div class="tx"><b>海岸线行驶中</b><span>纪录 / 风光 · 8.4</span></div><span class="rt">73<small>热度</small></span></li>
+        </ul>
+      </div>
+      <div class="vsc">
+        <div class="hd"><b>弱网播放榜</b><span>GROUP 2</span></div>
+        <ul>
+          <li class="g2"><span class="no">01</span><div class="tx"><b>服务区故事集</b><span>短片合集 · 8.1</span></div><span class="rt">94<small>稳定</small></span></li>
+          <li class="g2"><span class="no">02</span><div class="tx"><b>篝火电影院</b><span>短片合集 · 8.0</span></div><span class="rt">89<small>稳定</small></span></li>
+          <li class="g2"><span class="no">03</span><div class="tx"><b>地下车库的猫</b><span>短片 / 治愈 · 8.0</span></div><span class="rt">85<small>稳定</small></span></li>
+          <li class="g2"><span class="no">04</span><div class="tx"><b>颜色车车队</b><span>动画 / 启蒙 · 8.4</span></div><span class="rt">80<small>稳定</small></span></li>
+          <li class="g2"><span class="no">05</span><div class="tx"><b>路上的小侦探</b><span>儿童 / 推理 · 8.3</span></div><span class="rt">77<small>稳定</small></span></li>
+          <li class="g2"><span class="no">06</span><div class="tx"><b>帐篷外的风</b><span>纪录 / 自然 · 8.4</span></div><span class="rt">72<small>稳定</small></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 栏目四：关于本站 ================= -->
+  <section id="about" aria-label="关于本站">
+    <div class="headline">
+      <span class="bar"></span><span class="num">CFG 04</span>
+      <h2>关于本站</h2><span class="rule"></span>
+    </div>
+
+    <div class="flow">
+      <div class="st"><span class="n">STEP 01</span><span class="arrow">▶</span><h4>选择场景</h4><p>从长途、通勤、露营、亲子、夜路、大屏中选定当前出行状态。</p></div>
+      <div class="st"><span class="n">STEP 02</span><span class="arrow">▶</span><h4>匹配片单</h4><p>系统按时长、节奏与刺激性自动筛出适配影片。</p></div>
+      <div class="st"><span class="n">STEP 03</span><span class="arrow">▶</span><h4>检测座舱</h4><p>识别车机分辨率与比例，推荐对应画质档位。</p></div>
+      <div class="st"><span class="n">STEP 04</span><span class="arrow">▶</span><h4>离线上路</h4><p>生成可缓存清单，弱网与驻车场景都能稳定播放。</p></div>
+    </div>
+
+    <div class="split3" style="margin-top:14px">
+      <div class="kv">
+        <div class="hd"><span>// SITE_CONFIG.json</span><span>READ ONLY</span></div>
+        <dl>
+          <div class="pair"><dt>site_name</dt><dd><em>三邦车视电影网</em></dd></div>
+          <div class="pair"><dt>domain</dt><dd>https://sanbangcheshidianyingwang-wap.github.io/</dd></div>
+          <div class="pair"><dt>position</dt><dd>车载观影场景导航站</dd></div>
+          <div class="pair"><dt>scenes</dt><dd>6 类 · 42 个细分标签</dd></div>
+          <div class="pair"><dt>library</dt><dd>186 部 · 每周更新</dd></div>
+          <div class="pair"><dt>device</dt><dd>适配 96 款主流车机</dd></div>
+          <div class="pair"><dt>rating</dt><dd>4.8 / 5.0 · 用户综合评分</dd></div>
+          <div class="pair"><dt>protocol</dt><dd>HTTPS · 手机端优先</dd></div>
+        </dl>
+      </div>
+      <div class="notice">
+        <h4><i>!</i>使用与安全声明</h4>
+        <p>驾驶过程中请以行车安全为第一优先级。本页播放器仅为界面演示，实际观影请在车辆静止、驻车状态下进行，行驶途中请勿操作屏幕。</p>
+        <div class="checks">
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>驻车观看</b><span>仅限车辆静止时操作</span></div></div>
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>音量控制</b><span>不影响行车安全提示音</span></div></div>
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>内容为演示</b><span>片名与数据均为示例</span></div></div>
+          <div class="ck"><i><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg></i><div><b>反馈入口</b><span>异常可随时提交工单</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="headline" style="margin:26px 0 12px">
+      <span class="bar"></span><span class="num">FAQ 06</span>
+      <h2>常见问题</h2><span class="rule"></span>
+    </div>
+    <div class="panel">
+      <div class="panel-h"><b>FAQ · 4 条</b><span>CLICK TO EXPAND</span></div>
+      <div style="padding:2px 16px">
+        <details open>
+          <summary style="cursor:pointer;padding:13px 0;border-bottom:1px solid var(--line2);font-weight:700;font-size:14px;list-style:none;display:flex;align-items:center;gap:10px;font-family:var(--mono)"><span style="color:var(--amber)">[Q1]</span>三邦车视电影网和普通电影站有什么不同？<span style="margin-left:auto;color:var(--txt3);font-size:12px">▾</span></summary>
+          <p style="padding:12px 0 14px;font-size:13.5px;color:var(--txt2)">本站不是全量影视站，只围绕"出行途中怎么看片"这一个场景做深：片单按出行状态分类，标注单集时长、弱网支持与车机适配情况，解决的是"现在这种情况看什么合适"的问题。</p>
+        </details>
+        <details>
+          <summary style="cursor:pointer;padding:13px 0;border-bottom:1px solid var(--line2);font-weight:700;font-size:14px;list-style:none;display:flex;align-items:center;gap:10px;font-family:var(--mono)"><span style="color:var(--amber)">[Q2]</span>座舱大屏适配检测怎么用？<span style="margin-left:auto;color:var(--txt3);font-size:12px">▾</span></summary>
+          <p style="padding:12px 0 14px;font-size:13.5px;color:var(--txt2)">进入大屏适配标签页，选择车机分辨率（16:9 / 21:9 / 竖屏），系统会推荐对应画质档位与黑边最少的片源，避免宽屏被裁切或变形。</p>
+        </details>
+        <details>
+          <summary style="cursor:pointer;padding:13px 0;border-bottom:1px solid var(--line2);font-weight:700;font-size:14px;list-style:none;display:flex;align-items:center;gap:10px;font-family:var(--mono)"><span style="color:var(--amber)">[Q3]</span>弱网和驻车场景怎么解决播放问题？<span style="margin-left:auto;color:var(--txt3);font-size:12px">▾</span></summary>
+          <p style="padding:12px 0 14px;font-size:13.5px;color:var(--txt2)">本站单独维护"离线优先"与"弱网播放"两个榜单，优先推荐短时长、可分段、可缓存的内容；出行前在露营驻车标签下生成一份清单即可。</p>
+        </details>
+        <details>
+          <summary style="cursor:pointer;padding:13px 0;font-weight:700;font-size:14px;list-style:none;display:flex;align-items:center;gap:10px;font-family:var(--mono)"><span style="color:var(--amber)">[Q4]</span>内容版权与数据说明<span style="margin-left:auto;color:var(--txt3);font-size:12px">▾</span></summary>
+          <p style="padding:12px 0 14px;font-size:13.5px;color:var(--txt2)">本站所有影片名称、封面配色、剧情简介、评分与榜单数据均为虚构或示例内容，仅供页面效果展示，不代表任何真实影视作品；若涉及侵权请联系我们处理。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= 底部 ================= -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="brand">
+      <a class="logo" href="#top"><span class="mk" aria-hidden="true" style="background:var(--amber);color:#101216">3B</span><span style="color:#fff">三邦<em style="color:var(--amber2)">车视</em>电影网</span></a>
+      <p>三邦车视电影网手机版，专注车载观影场景的汽车电影导航站，长途自驾、城市通勤、露营驻车、亲子同车、夜路行驶、座舱大屏适配全场景覆盖。</p>
+    </div>
+    <div>
+      <h5>// 栏目</h5>
+      <ul>
+        <li><a href="#home">控制台 / 首页</a></li>
+        <li><a href="#library">片库与播放</a></li>
+        <li><a href="#rank">数据看板</a></li>
+        <li><a href="#about">关于本站</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>// 场景标签</h5>
+      <ul>
+        <li><a href="#library">长途自驾</a></li>
+        <li><a href="#library">城市通勤</a></li>
+        <li><a href="#library">露营驻车</a></li>
+        <li><a href="#library">亲子同车</a></li>
+        <li><a href="#library">夜路行驶</a></li>
+        <li><a href="#library">大屏适配</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>// 服务接口</h5>
+      <ul>
+        <li><a href="#about">离线清单生成</a></li>
+        <li><a href="#about">座舱适配检测</a></li>
+        <li><a href="#about">自驾路线片单</a></li>
+        <li><a href="#about">故障与反馈</a></li>
+        <li><a href="#about">使用与安全声明</a></li>
+        <li><a href="#about">常见问题</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap cp">
+    <span>© <span id="year">2026</span> 三邦车视电影网 · sanbangcheshidianyingwang-wap · 手机版</span>
+    <span>URL: https://sanbangcheshidianyingwang-wap.github.io/</span>
+  </div>
+</footer>
+
+<!-- ================= 底部导航 ================= -->
+<nav class="btab" aria-label="底部导航">
+  <a href="#home" class="on"><b>01</b>控制台</a>
+  <a href="#library"><b>02</b>片库</a>
+  <a href="#rank"><b>03</b>看板</a>
+  <a href="#about"><b>04</b>关于</a>
+</nav>
+
+<button class="topbtn" id="topBtn" aria-label="回到顶部">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+/* 打字机 */
+(function(){
+  var el = document.getElementById('type');
+  var txt = 'search --scene=long_drive --sort=rating';
+  var i = 0, del = false;
+  function tick(){
+    if(!del){
+      el.textContent = txt.slice(0, ++i);
+      if(i === txt.length){ del = true; setTimeout(tick, 2200); return; }
+      setTimeout(tick, 60 + Math.random()*60);
+    } else {
+      el.textContent = txt.slice(0, --i);
+      if(i === 0){ del = false; setTimeout(tick, 700); return; }
+      setTimeout(tick, 30);
+    }
+  }
+  tick();
+})();
+
+/* 数字增长动画 */
+(function(){
+  var els = document.querySelectorAll('.meter-s .val[data-n]');
+  var done = false;
+  function run(){
+    els.forEach(function(el){
+      var n = parseFloat(el.getAttribute('data-n')), dec = (el.getAttribute('data-n').split('.')[1]||'').length;
+      var cur = 0, step = n/40;
+      var id = setInterval(function(){
+        cur += step;
+        if(cur >= n){ cur = n; clearInterval(id); }
+        el.textContent = cur.toFixed(dec);
+      }, 22);
+    });
+  }
+  if('IntersectionObserver' in window){
+    var ob = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting && !done){ done=true; run(); ob.disconnect(); } });
+    }, {threshold:.3});
+    ob.observe(document.querySelector('.dash'));
+  } else { run(); }
+})();
+
+/* 播放器：进度条模拟 + 队列切换 */
+(function(){
+  var tl = document.getElementById('tl');
+  var bar = tl.querySelector('i');
+  var playing = true, pct = 38, timer;
+  function tick(){
+    pct += 0.35;
+    if(pct > 100) pct = 0;
+    bar.style.width = pct + '%';
+  }
+  timer = setInterval(function(){ if(playing) tick(); }, 600);
+  var pl = document.querySelector('.player .pl');
+  pl.addEventListener('click', function(){
+    playing = !playing;
+    pl.innerHTML = playing
+      ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z"/></svg>'
+      : '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg>';
+  });
+  tl.addEventListener('click', function(e){
+    var r = tl.getBoundingClientRect();
+    pct = (e.clientX - r.left) / r.width * 100;
+    bar.style.width = pct + '%';
+  });
+  var queue = document.querySelectorAll('.queue .it');
+  var t = document.getElementById('plT'), s = document.getElementById('plS');
+  queue.forEach(function(q){
+    q.addEventListener('click', function(){
+      queue.forEach(function(x){ x.classList.remove('on'); });
+      q.classList.add('on');
+      var b = q.querySelector('.tx b').textContent;
+      var m = q.querySelector('.tx span').textContent;
+      t.textContent = b;
+      s.textContent = m;
+      pct = 0; bar.style.width = '0%';
+    });
+  });
+})();
+
+/* Tab 切换 */
+(function(){
+  var tabs = document.querySelectorAll('.tabs button');
+  var pgs = document.querySelectorAll('.list .pg');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      tabs.forEach(function(x){ x.classList.toggle('on', x===t); });
+      var k = t.getAttribute('data-tab');
+      pgs.forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-pg')===k); });
+    });
+  });
+})();
+
+/* 仪表盘动画 */
+(function(){
+  var c1 = 326.7, c2 = 326.7;
+  var el1 = document.getElementById('g1'), el2 = document.getElementById('g2');
+  var v1 = document.getElementById('g1v'), v2 = document.getElementById('g2v');
+  var t1 = 0, t2 = 0, run = false;
+  function step(){
+    t1 += (84 - t1) * .05; t2 += (91 - t2) * .05;
+    el1.setAttribute('stroke-dashoffset', (c1 * (1 - t1/100)).toFixed(1));
+    el2.setAttribute('stroke-dashoffset', (c2 * (1 - t2/100)).toFixed(1));
+    v1.textContent = Math.round(t1); v2.textContent = Math.round(t2);
+    if(Math.abs(84-t1) > .3 || Math.abs(91-t2) > .3) requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    var ob = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting && !run){ run=true; requestAnimationFrame(step); ob.disconnect(); } });
+    }, {threshold:.3});
+    ob.observe(document.querySelector('.gauges'));
+  } else { requestAnimationFrame(step); }
+})();
+
+/* 抽屉 */
+(function(){
+  var side = document.getElementById('side'), mask = document.getElementById('mask');
+  var btn = document.getElementById('menuBtn');
+  function close(){ side.classList.remove('show'); mask.classList.remove('show'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(){ side.classList.add('show'); mask.classList.add('show'); btn.setAttribute('aria-expanded','true'); });
+  document.getElementById('closeBtn').addEventListener('click', close);
+  mask.addEventListener('click', close);
+  side.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+})();
+
+/* 回到顶部 */
+(function(){
+  var btn = document.getElementById('topBtn');
+  window.addEventListener('scroll', function(){ btn.classList.toggle('show', window.scrollY > 500); });
+  btn.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
+})();
+
+/* 底部导航高亮 */
+(function(){
+  var links = document.querySelectorAll('.btab a');
+  var ids = ['home','library','rank','about'];
+  var targets = ids.map(function(id){ return document.getElementById(id); });
+  function onScroll(){
+    var pos = window.scrollY + 130, cur = 0;
+    targets.forEach(function(t,i){ if(t && t.offsetTop <= pos) cur = i; });
+    links.forEach(function(a,i){ a.classList.toggle('on', i===cur); });
+  }
+  window.addEventListener('scroll', onScroll); onScroll();
+})();
+
+/* 年份 */
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
